@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
 export default App;
 */
 
-/*
+
 const App = () => {
 
   return (
@@ -163,9 +163,9 @@ const styles = StyleSheet.create({
 });
 
 export default App;
-*/
 
 
+/*
 const App = () => {
 
   const [item, setItem] = useState([
@@ -234,4 +234,4 @@ const styles = StyleSheet.create({
 });
 
 export default App;
-
+*/
