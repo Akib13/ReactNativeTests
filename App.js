@@ -8,7 +8,7 @@ import {
   RefreshControl,
 } from 'react-native';
 
-/*
+
 const App = () => {
 
   const [name, setName] = useState("Hi Akib");
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
 });
 
 export default App;
-*/
+
 
 /*
 const App = () => {
@@ -166,6 +166,7 @@ export default App;
 */
 
 
+/*
 const App = () => {
 
   const [item, setItem] = useState([
@@ -234,4 +235,4 @@ const styles = StyleSheet.create({
 });
 
 export default App;
-
+*/
