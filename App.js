@@ -6,8 +6,93 @@ import {
   View,
   ScrollView,
   RefreshControl,
+  FlatList,
+  SectionList,
 } from 'react-native';
 
+// Flat List 
+const App = () => {
+
+  const [Item, setItem] = useState([
+    {name: 'item 1'},
+    {name: 'item 2'},
+    {name: 'item 3'},
+    {name: 'item 4'},
+    {name: 'item 5'},
+    {name: 'item 6'},
+    {name: 'item 7'},
+    {name: 'item 8'},
+    {name: 'item 9'},
+    {name: 'item 10'},
+  ]);
+
+  const DATA = [
+    {
+      title: 'Title 1',
+      data: ['Item 1-1', 'Item 1-2', 'Item 1-3'],
+    },
+    {
+      title: 'Title 2',
+      data: ['Item 2-1', 'Item 2-2', 'Item 2-3'],
+    },
+    {
+      title: 'Title 3',
+      data: ['Item 3-1'],
+    },
+    {
+      title: 'Title 4',
+      data: ['Item 4-1', 'Item 4-2'],
+    },
+  ]
+
+  const [refresh, setRefresh] = useState (false);
+
+  const onRefresh = () => {
+    setRefresh(true);
+    setItem([...Item, {name: '11'}]);
+    setRefresh(false);
+  }
+
+  return (
+    
+    <SectionList
+      keyExtractor={(item, index) => index.toString()}
+      sections={DATA}
+      renderItem={({ item }) => (
+        <Text style={styles.text}>{item}</Text>
+      )}
+      renderSectionHeader={({section})=>(
+        <View style={styles.item}>
+          <Text style={styles.text}>{section.title}</Text>
+        </View>
+      )}
+    />
+    
+    // FLAT LIST 
+    /*
+    <FlatList
+    keyExtractor={(item, index) => index.toString()}
+       data={Item}
+       renderItem={({ item }) => (
+         <View style={styles.item}>
+           <Text style={styles.text}>{item.name}</Text>
+         </View>
+       )}
+       refreshControl = {
+        <RefreshControl
+          refreshing = {refresh}
+          onRefresh = {onRefresh}
+          colors= {['#ff00ff']}
+        />
+      }
+     />
+    */
+  );
+};
+
+
+// Scroll view component
+/*
 const App = () => {
 
   const [item, setItem] = useState([
@@ -54,6 +139,7 @@ const App = () => {
     </ScrollView>
   );
 };
+*/
 
 const styles = StyleSheet.create({
   body: {
