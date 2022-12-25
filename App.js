@@ -10,7 +10,7 @@ import {
   SectionList,
 } from 'react-native';
 
-// Flat List 
+
 const App = () => {
 
   const [Item, setItem] = useState([
@@ -55,6 +55,7 @@ const App = () => {
 
   return (
     
+    // SECTION LIST
     <SectionList
       keyExtractor={(item, index) => index.toString()}
       sections={DATA}
@@ -67,7 +68,8 @@ const App = () => {
         </View>
       )}
     />
-    
+  
+ 
     // FLAT LIST 
     /*
     <FlatList
