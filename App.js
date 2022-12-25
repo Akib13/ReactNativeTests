@@ -10,7 +10,59 @@ import {
   SectionList,
 } from 'react-native';
 
+// Reloading items of section list (Task)
+const App = () => {
 
+  const [Sections, setSections] = useState([
+    {
+      title: 'Title 1',
+      data: ['Item 1-1', 'Item 1-2'],
+    },
+  ]);
+  const onRefresh = () => {
+    setRefreshing(true);
+    const adding_index = Sections.length + 1;
+    setSections([...Sections,
+    {
+      title: 'Title ' + adding_index,
+      data:
+        [
+          'Item ' + adding_index + '-1',
+          'Item ' + adding_index + '-2'
+        ],
+    }
+    ]);
+    setRefreshing(false);
+  }
+  const [Refreshing, setRefreshing] = useState(false);
+
+  return (
+    <SectionList
+      keyExtractor={(item, index) => index.toString()}
+      sections={Sections}
+      renderItem={({ item }) => (
+        <View style={styles.item}>
+          <Text style={styles.text_item}>{item}</Text>
+        </View >
+      )}
+      renderSectionHeader={({ section }) => (
+        <View style={styles.header}>
+          <Text style={styles.text_header}>{section.title}</Text>
+        </View>
+      )}
+      refreshControl={
+        < RefreshControl
+          refreshing={Refreshing}
+          onRefresh={onRefresh}
+        />
+      }
+    />
+  );
+};
+
+
+/*
+// Tutorial Parts 
 const App = () => {
 
   const [Item, setItem] = useState([
@@ -71,27 +123,26 @@ const App = () => {
   
  
     // FLAT LIST 
-    /*
-    <FlatList
-    keyExtractor={(item, index) => index.toString()}
-       data={Item}
-       renderItem={({ item }) => (
-         <View style={styles.item}>
-           <Text style={styles.text}>{item.name}</Text>
-         </View>
-       )}
-       refreshControl = {
-        <RefreshControl
-          refreshing = {refresh}
-          onRefresh = {onRefresh}
-          colors= {['#ff00ff']}
-        />
-      }
-     />
-    */
+    
+    // <FlatList
+    // keyExtractor={(item, index) => index.toString()}
+       // data={Item}
+       // renderItem={({ item }) => (
+        //<View style={styles.item}>
+           // <Text style={styles.text}>{item.name}</Text>
+         // </View>
+       // )}
+       // refreshControl = {
+        // <RefreshControl
+          // refreshing = {refresh}
+          // onRefresh = {onRefresh}
+          // colors= {['#ff00ff']}
+        // />
+      // }
+     // />
   );
 };
-
+*/ 
 
 // Scroll view component
 /*
@@ -160,7 +211,26 @@ const styles = StyleSheet.create({
     fontStyle: 'italic',
     fontWeight: 'bold',
     margin: 10
-  }
+  }, 
+
+  header: {
+    backgroundColor: '#4ae1fa',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 2,
+  },
+
+  text_header: {
+    color: '#000000',
+    fontSize: 45,
+    fontStyle: 'italic',
+    margin: 10,
+  },
+  text_item: {
+    color: '#000000',
+    fontSize: 35,
+    margin: 5,
+  },
 });
 
 export default App;
