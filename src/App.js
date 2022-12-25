@@ -5,14 +5,12 @@ import {
   Text,
   TextInput,
   Pressable,
-  Alert,
-  ToastAndroid,
   Modal,
   Image,
   ImageBackground,
-  Button,
-  TouchableOpacity,
 } from 'react-native';
+import CustomButton from './CustomButton';
+import Header from './Header';
 
 
 const App = () => {
@@ -24,9 +22,6 @@ const App = () => {
     if (name.length > 3) {
       SetSubmitted(!submitted);
     } else {
-      /*Alert.alert('Warning', 'The name must be longer than 3 charachters', [
-        {text: 'Do not show this again'}, {text: 'Cancel'}, {text: 'OK'}
-      ], {cancelable: true})*/
       SetshowWarning(true);
     }
   };
@@ -36,6 +31,7 @@ const App = () => {
       style={styles.body}
       source={{ uri: 'https://cdn.pixabay.com/photo/2013/07/12/12/35/texture-145968_960_720.png' }}
     >
+      <Header />
       <Modal
         visible={showWarning}
         transparent
@@ -72,34 +68,20 @@ const App = () => {
         onChangeText={(value) => SetName(value)}
       />
 
-      {/*<Button
-        title={submitted ? 'Clear' : 'Submit'}
-        onPress={onPressHandler}
-        color="#00f"
+      <CustomButton
+        onPressFunction={onPressHandler}
+        title = {submitted ? 'Clear' : 'Submit'}
+        color={"#00ff00"}
       />
 
-      <TouchableOpacity
-      onPress = {onPressHandler}
-      style={styles.button}
-      >
-        <Text style={styles.text}>
-          {submitted ? 'Clear' : 'Submit'}
-        </Text>
-      </TouchableOpacity> */}
+      <CustomButton
+        onPressFunction={() => { }}
+        title = {'Test'}
+        color={"#ff00ff"}
+        style = {{ margin: 10 }}
+      />
 
-      <Pressable
-        onPress={onPressHandler}
-        hitSlop={{ top: 10, bottom: 10, right: 10, left: 10 }}
-        android_ripple={{ color: '#00f' }}
-        style={({ pressed }) => [
-          { backgroundColor: pressed ? '#dddddd' : '#00ff00' },
-          styles.button
-        ]}
-      >
-        <Text style={styles.text}>
-          {submitted ? 'Clear' : 'Submit'}
-        </Text>
-      </Pressable>
+
       {
         submitted ?
           <View style={styles.body}>
@@ -108,7 +90,7 @@ const App = () => {
             </Text>
             <Image
               style={styles.image}
-              source={require('./assets/done.png')}
+              source={require('../assets/done.png')}
               resizeMode='stretch'
             />
           </View>
