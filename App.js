@@ -1,236 +1,192 @@
 import React, {useState} from 'react';
 import {
   StyleSheet,
-  Text,
-  Button,
   View,
-  ScrollView,
-  RefreshControl,
+  Text,
+  TextInput,
+  Pressable,
+  Alert,
+  ToastAndroid,
+  Modal,
+  Image,
+  ImageBackground,
+  Button,
+  TouchableOpacity,
 } from 'react-native';
 
-/*
+
 const App = () => {
 
-  const [name, setName] = useState("Hi Akib");
-  const [session, setSession] = useState({ number:1, title: "test 1"});
-  const [current, setCurrent] = useState (false);
-  const [click, setClick] = useState (0);
-
-  const onClickHandler = () => {
-    setName ("!!! AKIB AHMED !!!");
-    setSession ({ number: 2, title: "test-2" });
-    setCurrent (true);
-    setClick (click + 1);
+  const [name, SetName] = useState('');
+  const [submitted, SetSubmitted] = useState(false);
+  const [showWarning, SetshowWarning] = useState(false);
+  const onPressHandler = () => {
+    if (name.length > 3) {
+      SetSubmitted(!submitted);
+    } else {
+      /*Alert.alert('Warning', 'The name must be longer than 3 charachters', [
+        {text: 'Do not show this again'}, {text: 'Cancel'}, {text: 'OK'}
+      ], {cancelable: true})*/
+      SetshowWarning(true);
+    }
   };
 
   return (
-    <View style={styles.body}>
-      <Text style={styles.text}> {name} </Text>
-      <Text style={styles.text}> take {session.number} and {session.title} </Text>
-      <Text style={styles.text}> Boolean Test {current ? " True" : " False"} </Text>
-      <Button title='click here' onPress={onClickHandler}> </Button>
-      <Text style={styles.text}> initial number : {click * 5} </Text>
-      <Text style={styles.text}> Clicked the button {click} times </Text>
-    </View>
+    <ImageBackground
+      style={styles.body}
+      source={{ uri: 'https://cdn.pixabay.com/photo/2013/07/12/12/35/texture-145968_960_720.png' }}
+    >
+      <Modal
+        visible={showWarning}
+        transparent
+        onRequestClose={() =>
+          SetshowWarning(false)
+        }
+        animationType='slide'
+        hardwareAccelerated
+      >
+        <View style={styles.centered_view}>
+          <View style={styles.warning_modal}>
+            <View style={styles.warning_title}>
+              <Text style={styles.text}>WARNING!</Text>
+            </View>
+            <View style={styles.warning_body}>
+              <Text style={styles.text}>The name must be longer than 3 charachters</Text>
+            </View>
+            <Pressable
+              onPress={() => SetshowWarning(false)}
+              style={styles.warning_button}
+              android_ripple={{ color: '#fff' }}
+            >
+              <Text style={styles.text}>OK</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
+      <Text style={styles.text}>
+        Please write your name:
+      </Text>
+      <TextInput
+        style={styles.input}
+        placeholder='e.g. John'
+        onChangeText={(value) => SetName(value)}
+      />
+
+      {/*<Button
+        title={submitted ? 'Clear' : 'Submit'}
+        onPress={onPressHandler}
+        color="#00f"
+      />
+
+      <TouchableOpacity
+      onPress = {onPressHandler}
+      style={styles.button}
+      >
+        <Text style={styles.text}>
+          {submitted ? 'Clear' : 'Submit'}
+        </Text>
+      </TouchableOpacity> */}
+
+      <Pressable
+        onPress={onPressHandler}
+        hitSlop={{ top: 10, bottom: 10, right: 10, left: 10 }}
+        android_ripple={{ color: '#00f' }}
+        style={({ pressed }) => [
+          { backgroundColor: pressed ? '#dddddd' : '#00ff00' },
+          styles.button
+        ]}
+      >
+        <Text style={styles.text}>
+          {submitted ? 'Clear' : 'Submit'}
+        </Text>
+      </Pressable>
+      {
+        submitted ?
+          <View style={styles.body}>
+            <Text style={styles.text}>
+              You are registered as {name}
+            </Text>
+            <Image
+              style={styles.image}
+              source={require('./assets/done.png')}
+              resizeMode='stretch'
+            />
+          </View>
+          :
+          <Image
+            style={styles.image}
+            source={{ uri: 'https://cdn.pixabay.com/photo/2018/01/04/15/51/404-error-3060993_960_720.png' }}
+            resizeMode='stretch'
+          />
+      }
+    </ImageBackground >
   );
 };
 
 const styles = StyleSheet.create({
   body: {
     flex: 1,
-    backgroundColor: "#ffffff",
     alignItems: 'center',
-    justifyContent: 'center'
-  },
-  text: {
-    fontSize: 18,
-    fontStyle: 'italic',
-    fontWeight: 'bold',
-    margin: 10
-  }
-});
-
-export default App;
-*/
-
-/*
-const App = () => {
-
-  return (
-    <View style={styles.body}>
-      <View style={styles.row}>
-        <View style={styles.view1}>
-          <Text style={styles.text}>1</Text>
-        </View>
-        <View style={styles.view2}>
-          <Text style={styles.text}>2</Text>
-        </View>
-        <View style={styles.view3}>
-          <Text style={styles.text}>3</Text>
-        </View>
-      </View>
-      <View style={styles.row}>
-        <View style={styles.view4}>
-          <Text style={styles.text}>4</Text>
-        </View>
-      </View>
-      <View style={styles.row}>
-        <View style={styles.view5}>
-          <Text style={styles.text}>5</Text>
-        </View>
-      </View>
-      <View style={styles.big_row}>
-        <View style={styles.view6}>
-          <Text style={styles.text}>6</Text>
-        </View>
-        <View style={styles.view7}>
-          <Text style={styles.text}>7</Text>
-        </View>
-      </View>
-    </View>
-  );
-};
-
-const styles = StyleSheet.create({
-  body: {
-    flex: 1,
-    flexDirection: 'column',
-    backgroundColor: '#ffffff',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-  },
-  row: {
-    flexDirection: 'row',
-    backgroundColor: '#ffffff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  big_row: {
-    flex: 1,
-    flexDirection: 'row',
-    backgroundColor: '#ffffff',
-    alignItems: 'stretch',
-    justifyContent: 'center',
-  },
-  view1: {
-    flex: 1,
-    backgroundColor: '#00ffff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  view2: {
-    flex: 2,
-    backgroundColor: '#ff00ff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  view3: {
-    flex: 3,
-    backgroundColor: '#ffff00',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  view4: {
-    flex: 1,
-    backgroundColor: '#ff0000',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  view5: {
-    flex: 1,
-    backgroundColor: '#0fff0f',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  view6: {
-    flex: 1,
-    backgroundColor: '#ffffff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  view7: {
-    flex: 1,
-    backgroundColor: '#0000ff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   text: {
     color: '#000000',
-    fontSize: 35,
-    fontStyle: 'italic',
+    fontSize: 20,
     margin: 10,
+    textAlign: 'center',
   },
-});
-
-export default App;
-*/
-
-
-const App = () => {
-
-  const [item, setItem] = useState([
-    {key: 1, value: 1},
-    {key: 2, value: 2},
-    {key: 3, value: 3},
-    {key: 4, value: 4},
-    {key: 5, value: 5},
-    {key: 6, value: 6},
-    {key: 7, value: 7},
-    {key: 8, value: 8},
-    {key: 9, value: 9},
-    {key: 10, value: 10},
-  ]);
-
-  const [refresh, setRefresh] = useState (false);
-
-  const onRefresh = () => {
-    setRefresh(true);
-    setItem([...item, {key: 11, value: 11}]);
-    setRefresh(false);
-  }
-
-  return (
-    <ScrollView 
-      style={styles.body}
-      refreshControl = {
-        <RefreshControl
-          refreshing = {refresh}
-          onRefresh = {onRefresh}
-          colors= {['#ff00ff']}
-        />
-      }
-      >
-      {
-        item.map((object) => {
-          return (
-            <View style = {styles.item} key = {object.key}>
-              <Text style={styles.text}> {object.key} </Text>
-            </View>
-          )
-        })
-      }
-    </ScrollView>
-  );
-};
-
-const styles = StyleSheet.create({
-  body: {
-    flex: 1,
-    backgroundColor: "#ffffff",
-    flexDirection: 'column',
+  input: {
+    width: 200,
+    borderWidth: 1,
+    borderColor: '#555',
+    borderRadius: 5,
+    textAlign: 'center',
+    fontSize: 20,
+    marginBottom: 10,
   },
-  item: {
-    backgroundColor: '#fab',
+  button: {
+    width: 150,
+    height: 50,
     alignItems: 'center',
-    justifyContent: 'center',
-    margin: 10,
-  },
-  text: {
-    fontSize: 28,
-    fontStyle: 'italic',
-    fontWeight: 'bold',
     margin: 10
+  },
+  centered_view: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#00000099'
+  },
+  warning_modal: {
+    width: 300,
+    height: 300,
+    backgroundColor: '#ffffff',
+    borderWidth: 1,
+    borderColor: '#000',
+    borderRadius: 20,
+  },
+  warning_title: {
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#ff0',
+    borderTopRightRadius: 20,
+    borderTopLeftRadius: 20,
+  },
+  warning_body: {
+    height: 200,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  warning_button: {
+    backgroundColor: '#00ffff',
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+  },
+  image: {
+    width: 100,
+    height: 100,
+    margin: 10,
   }
+
 });
 
 export default App;
