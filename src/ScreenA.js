@@ -9,8 +9,7 @@ import {
 export default function ScreenA ({navigation}) {
 
     const onPressHandler = () => {
-        navigation.navigate("Screen_B");
-        //navigation.replace("Screen_B");
+        navigation.openDrawer();
     }
 
     return(
@@ -18,12 +17,13 @@ export default function ScreenA ({navigation}) {
         <Text style = {styles.text}> 
             This is screen A
         </Text>
+
         <Pressable
             onPress={onPressHandler}
             style = {({pressed}) => ({ backgroundColor: pressed ? "#ddd": "#0f0" })}
         >
             <Text style = {styles.text}> 
-            Go to screen B
+            Open Drawer
             </Text>
         </Pressable>
         </View>
