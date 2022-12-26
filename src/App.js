@@ -40,7 +40,7 @@ const App = () => {
           name='Screen_B'
           component={ScreenB}
           options={{
-            title: "Screen A",
+            title: "Screen B",
             drawerIcon: ({focused}) => (
               <FontAwesome5 
                 name = "btc"
@@ -49,6 +49,7 @@ const App = () => {
               />
             )
           }}
+          initialParams={{Message: "From Drawer", Id: 1}}
         />
       </Drawer.Navigator>
     </NavigationContainer>

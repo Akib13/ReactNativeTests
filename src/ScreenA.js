@@ -6,10 +6,11 @@ import {
   Pressable
 } from 'react-native';
 
-export default function ScreenA ({navigation}) {
+export default function ScreenA ({navigation, route}) {
 
     const onPressHandler = () => {
-        navigation.openDrawer();
+        // navigation.openDrawer();
+        navigation.navigate("Screen_B");
     }
 
     return(
@@ -23,9 +24,10 @@ export default function ScreenA ({navigation}) {
             style = {({pressed}) => ({ backgroundColor: pressed ? "#ddd": "#0f0" })}
         >
             <Text style = {styles.text}> 
-            Open Drawer
+            Go to screen B
             </Text>
         </Pressable>
+        <Text style = {styles.text}> {route.params?.msg} </Text>
         </View>
     )
 };
