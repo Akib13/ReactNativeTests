@@ -1,5 +1,6 @@
 # ReactNativeTests
 
 The stack navigator tested for react native app:
-![Screenshot from 2022-12-26 16-58-15](https://user-images.githubusercontent.com/60085936/209561552-0453b257-807f-4ba2-b781-1677c527c862.png)
-![Screenshot from 2022-12-26 16-58-23](https://user-images.githubusercontent.com/60085936/209561555-e54ba94d-8951-4171-9905-e0e8a2ec774b.png)
+
+
+![Screenshot from 2022-12-26 18-53-55](https://user-images.githubusercontent.com/60085936/209569416-d2a501b0-a746-4c00-8966-c7c3677c10e5.png)
