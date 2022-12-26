@@ -1,6 +1,7 @@
 # ReactNativeTests
 
-The Tab navigator tested for react native app:
+The Drawer navigator tested for react native app:
 
+1. the outlook:
 
-![Screenshot from 2022-12-26 18-53-55](https://user-images.githubusercontent.com/60085936/209569416-d2a501b0-a746-4c00-8966-c7c3677c10e5.png)
+![Screenshot from 2022-12-26 23-04-32](https://user-images.githubusercontent.com/60085936/209583396-d485a8bd-cb43-43db-be35-47815883aaa2.png)
