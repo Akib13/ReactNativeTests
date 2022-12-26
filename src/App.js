@@ -1,34 +1,54 @@
 import React, {useState} from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator, Header } from '@react-navigation/stack';
 import ScreenA from './ScreenA';
 import ScreenB from './ScreenB';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
-const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
 
 const App = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator
-      // remove header from all screens
-      /*screenOptions={{
-        header: () => null
-      }}*/
+      <Tab.Navigator
+        screenOptions={({route}) => ({
+          tabBarActiveTintColor : '#f0f',
+          tabBarInactiveTintColor: '#555',
+          tabBarShowLabel: false,
+          tabBarIcon: ({focused, color, size}) => {
+            let iconName;
+            if(route.name === 'Screen_A') {
+              iconName = 'atlassian';
+              size = focused ? 30:20;
+              // color = focused ? '#f0f' : '#555';
+            }
+            else if (route.name === 'Screen_B') {
+              iconName = 'btc';
+              size = focused ? 30:20;
+              // color = focused ? '#f0f' : '#555';
+            }
+            return (
+              <FontAwesome5
+                name = {iconName}
+                size = {size}
+                color = {color}
+              />
+            );
+        }
+      })}
+      
       >
-        <Stack.Screen
+        <Tab.Screen
           name='Screen_A'
           component={ScreenA}
-          // to remove the header from a screen
-          options = {{
-            header:() => null
-          }}
+          options={{tabBarBadge: 3}}
         />
-        <Stack.Screen
+        <Tab.Screen
         name='Screen_B'
         component={ScreenB}
         />
-      </Stack.Navigator>
+      </Tab.Navigator>
     </NavigationContainer>
   );
 };
