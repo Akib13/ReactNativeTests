@@ -5,6 +5,7 @@ import {
   View,
   Pressable
 } from 'react-native';
+import GlobalStyle from '../utils/GlobalStyle';
 
 export default function ScreenA ({navigation}) {
 
@@ -15,14 +16,17 @@ export default function ScreenA ({navigation}) {
 
     return(
         <View style={styles.body} >
-        <Text style = {styles.text}> 
+        <Text style = {[
+            GlobalStyle.CustomFont,
+            styles.text
+        ]}> 
             This is screen A
         </Text>
         <Pressable
             onPress={onPressHandler}
             style = {({pressed}) => ({ backgroundColor: pressed ? "#ddd": "#0f0" })}
         >
-            <Text style = {styles.text}> 
+            <Text style = {GlobalStyle.ButtonText}> 
             Go to screen B
             </Text>
         </Pressable>
@@ -38,7 +42,8 @@ body: {
 },
 text: {
     fontSize: 40,
-    fontWeight: 'bold',
+    //fontWeight: 'bold',
     margin: 10,
+    //fontFamily: 'DancingScript-VariableFont_wght',
 }
 });
