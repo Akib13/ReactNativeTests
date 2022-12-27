@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator, Header } from '@react-navigation/stack';
-import ScreenA from './screens/ScreenA';
-import ScreenB from './screens/ScreenB';
+import Login from './screens/Login';
+import Home from './screens/Home';
 
 const Stack = createStackNavigator();
 
@@ -11,18 +11,30 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
+      initialRouteName='Login'
+      screenOptions={{
+        headerTitleAlign: 'center',
+        headerStyle: {
+          backgroundColor: '#0080ff'
+        },
+        headerTintColor: '#ffffff',
+        headerTitleStyle: {
+          fontSize: 25,
+          fontWeight: 'bold'
+        }
+      }}
       >
         <Stack.Screen
-          name='Screen_A'
-          component={ScreenA}
+          name='Login'
+          component={Login}
           
           options = {{
-            header:() => null
+            headerShown: false,
           }}
         />
         <Stack.Screen
-        name='Screen_B'
-        component={ScreenB}
+          name='Home'
+          component={Home}
         />
       </Stack.Navigator>
     </NavigationContainer>
