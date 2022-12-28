@@ -1,7 +1,6 @@
 # ReactNativeTests
 
-Async Storage output:
+Redux state controller with SQLite Storage output:
 
-
-![Screenshot from 2022-12-28 18-49-02](https://user-images.githubusercontent.com/60085936/209845498-b67e45c6-d1e6-406d-b300-d27b59adca89.png)
-![Screenshot from 2022-12-27 21-05-21](https://user-images.githubusercontent.com/60085936/209712468-991c3e19-c0a1-4ce0-8ad5-081acb8de678.png)
+![Screenshot from 2022-12-28 21-08-07](https://user-images.githubusercontent.com/60085936/209860999-4ff5f168-d395-4373-9aab-3f4a048af045.png)
+![Screenshot from 2022-12-28 21-07-59](https://user-images.githubusercontent.com/60085936/209861011-75717a2e-1a4e-4413-9415-0da5aeaa5cf0.png)
