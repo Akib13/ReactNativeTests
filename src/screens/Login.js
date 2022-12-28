@@ -11,6 +11,9 @@ import {
 import CustomButton from '../utils/CustomButton';
 // import AsyncStorage from '@react-native-async-storage/async-storage';
 import SQLite from 'react-native-sqlite-storage';
+import { useSelector, useDispatch } from 'react-redux';
+import { setName, setAge } from '../redux/actions';
+
 
 const db = SQLite.openDatabase(
     {
@@ -23,8 +26,11 @@ const db = SQLite.openDatabase(
 
 export default function Login ({navigation}) {
 
-    const [name, setName] = useState('');
-    const [age, setAge] = useState('');
+    // const [name, setName] = useState('');
+    // const [age, setAge] = useState('');
+
+    const { name, age } = useSelector(state => state.userReducer);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         createTable();
@@ -72,6 +78,9 @@ export default function Login ({navigation}) {
         }
         else {
             try {
+                dispatch(setName(name));
+                dispatch(setAge(age));
+
                 /*var user = {
                     Name: name,
                     Age: age
@@ -99,23 +108,23 @@ export default function Login ({navigation}) {
         <View style={styles.body} >
             <Image
                 style={styles.logo}
-                source={require('../../assets/sqlite.jpeg')}
+                source={require('../../assets/redux_logo.png')}
             />
 
             <Text style={styles.text}>
-                Database
+                Redux
             </Text>
 
             <TextInput 
                 style={styles.input} 
                 placeholder="Enter your name"
-                onChangeText={(value) => setName(value)}
+                onChangeText={(value) => dispatch(setName(value))}
             />
 
             <TextInput 
                 style={styles.input} 
                 placeholder="Enter your Age"
-                onChangeText={(value) => setAge(value)}
+                onChangeText={(value) => dispatch(setAge(value))}
             />
 
             <CustomButton 
@@ -135,8 +144,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#0080ff',
     },
     logo: {
-        //width: 100,
-        //height: 100,
+        width: 100,
+        height: 100,
         margin: 20,
     },
     text: {

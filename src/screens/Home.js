@@ -11,6 +11,8 @@ import {
 import CustomButton from '../utils/CustomButton';
 import GlobalStyle from '../utils/GlobalStyle';
 import SQLite from 'react-native-sqlite-storage';
+import { useSelector, useDispatch } from 'react-redux';
+import { setName, setAge, increaseAge } from '../redux/actions';
 
 const db = SQLite.openDatabase(
     {
@@ -23,8 +25,11 @@ const db = SQLite.openDatabase(
 
 export default function Home ({navigation}) {
 
-    const [name, setName] = useState('');
-    const [age, setAge] = useState('');
+    // const [name, setName] = useState('');
+    // const [age, setAge] = useState('');
+
+    const { name, age } = useSelector(state => state.userReducer);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         getData();
@@ -50,8 +55,8 @@ export default function Home ({navigation}) {
                             var userName = results.rows.item(0).Name;
                             var userAge = results.rows.item(0).Age;
 
-                            setName(userName);
-                            setAge(userAge);
+                            dispatch(setName(userName));
+                            dispatch(setAge(userAge));
                         }
                     }
                 )
@@ -116,7 +121,7 @@ export default function Home ({navigation}) {
             <TextInput 
                 style={styles.input} 
                 value={name}
-                onChangeText={(value) => setName(value)}
+                onChangeText={(value) => dispatch(setName(value))}
             />
             <CustomButton 
                 title = 'Update'
@@ -127,6 +132,12 @@ export default function Home ({navigation}) {
                 title = 'Remove'
                 color = '#f41'
                 onPressFunction = {removeData}
+                style={{ marginTop: 10 }}
+            />
+            <CustomButton 
+                title = 'Add Age'
+                color = '#0080ff'
+                onPressFunction = {() => {dispatch(increaseAge())}}
                 style={{ marginTop: 10 }}
             />
         </View>
