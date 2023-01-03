@@ -6,13 +6,14 @@ import {
   View,
   Pressable,
   Alert,
-  TextInput
+  TextInput,
+  FlatList
 } from 'react-native';
 import CustomButton from '../utils/CustomButton';
 import GlobalStyle from '../utils/GlobalStyle';
 import SQLite from 'react-native-sqlite-storage';
 import { useSelector, useDispatch } from 'react-redux';
-import { setName, setAge, increaseAge } from '../redux/actions';
+import { setName, setAge, increaseAge, getCities } from '../redux/actions';
 
 const db = SQLite.openDatabase(
     {
@@ -28,11 +29,12 @@ export default function Home ({navigation}) {
     // const [name, setName] = useState('');
     // const [age, setAge] = useState('');
 
-    const { name, age } = useSelector(state => state.userReducer);
+    const { name, age, cities } = useSelector(state => state.userReducer);
     const dispatch = useDispatch();
 
     useEffect(() => {
         getData();
+        dispatch(getCities());
     }, []);
 
     const getData = () => {
@@ -115,7 +117,19 @@ export default function Home ({navigation}) {
             <Text style={[GlobalStyle.CustomFont, styles.text]}>
                 Welcome {name}!
             </Text>
-            <Text style={[GlobalStyle.CustomFont, styles.text]}>
+
+            <FlatList 
+                data={cities}
+                renderItem={({item}) => (
+                    <View style = {styles.item}>
+                        <Text style = {styles.title}>{item.country}</Text>
+                        <Text style = {styles.subtitle}>{item.city}</Text>
+                    </View>
+                )}
+            />
+
+
+            { /*<Text style={[GlobalStyle.CustomFont, styles.text]}>
                 You are: {age}!
             </Text>
             <TextInput 
@@ -139,7 +153,7 @@ export default function Home ({navigation}) {
                 color = '#0080ff'
                 onPressFunction = {() => {dispatch(increaseAge())}}
                 style={{ marginTop: 10 }}
-            />
+    />*/}
         </View>
     )
 };
@@ -163,5 +177,24 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         textAlign: 'center',
         fontSize: 20,
+    },
+    item: {
+        backgroundColor: "#ffffff",
+        borderWidth: 2,
+        borderColor: "#cccccc",
+        borderRadius: 5,
+        margin: 7,
+        width: 350,
+        justifyContent: 'center',
+        alignItems: "center",
+    },
+    title: {
+        fontSize: 30,
+        margin:10,
+    },
+    subtitle: {
+        fontSize: 20,
+        margin: 10,
+        color: "#999999",
     },
 });
