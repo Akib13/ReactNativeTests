@@ -147,7 +147,12 @@ export default function Home ({navigation}) {
                 data={cities}
                 renderItem={({item, index}) => (
                     <TouchableOpacity
-                        onPress={() => { handleNotification(item, index) }}
+                        onPress={() => { 
+                            handleNotification(item, index);
+                            navigation.navigate('Map', {
+                                city: item.city,
+                            });
+                        }}
                     >
                         <View style={styles.item}>
                             <Text style={styles.title}>{item.country}</Text>
