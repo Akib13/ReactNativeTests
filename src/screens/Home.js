@@ -151,6 +151,8 @@ export default function Home ({navigation}) {
                             handleNotification(item, index);
                             navigation.navigate('Map', {
                                 city: item.city,
+                                lat: item.lat,
+                                lng: item.lng,
                             });
                         }}
                     >
