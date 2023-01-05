@@ -143,6 +143,12 @@ export default function Home ({navigation}) {
                 Welcome {name}!
             </Text>
 
+            <CustomButton 
+                title="Open Camera"
+                color="#0080ff"
+                onPressFunction={() => { navigation.navigate('Camera') }}
+            />
+
             <FlatList 
                 data={cities}
                 renderItem={({item, index}) => (
